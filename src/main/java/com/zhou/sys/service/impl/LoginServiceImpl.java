@@ -1,6 +1,8 @@
 package com.zhou.sys.service.impl;
 
 import com.zhou.common.BusinessException;
+import com.zhou.common.utils.JwtUtils;
+import com.zhou.common.utils.PasswordUtils;
 import com.zhou.sys.mapper.SysUserMapper;
 import com.zhou.sys.model.SysUser;
 import com.zhou.sys.request.LoginRequest;
@@ -25,9 +27,9 @@ public class LoginServiceImpl implements LoginService {
         if (sysUser == null) {
             throw new BusinessException(500,"用户名不存在");
         }
-        if (!sysUser.getPassword().equals(loginRequest.getPassword())) {  //todo password
+        if (!PasswordUtils.matches(loginRequest.getPassword(),sysUser.getPassword())) {
             throw new BusinessException(500,"密码错误！");
         }
-        return UUID.randomUUID().toString(); //todo JWT
+        return JwtUtils.create(sysUser);
     }
 }
