@@ -11,8 +11,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.UUID;
-
 @Service
 @Slf4j
 public class LoginServiceImpl implements LoginService {
@@ -30,6 +28,10 @@ public class LoginServiceImpl implements LoginService {
         if (!PasswordUtils.matches(loginRequest.getPassword(),sysUser.getPassword())) {
             throw new BusinessException(500,"密码错误！");
         }
-        return JwtUtils.create(sysUser);
+        String token = JwtUtils.create(sysUser);
+
+        //todo
+
+        return token;
     }
 }
