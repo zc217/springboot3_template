@@ -20,6 +20,7 @@ public class JwtUtils {
         Map<String, Object> claims = new HashMap<String, Object>();
         claims.put("uuid", UUIDUtils.uuid());
         claims.put("username", sysUser.getUsername());
+        claims.put("realName", sysUser.getRealName());
         claims.put("userid", sysUser.getId());
         
         return Jwts.builder()
@@ -33,7 +34,7 @@ public class JwtUtils {
     public static Claims parse (String token){
         Claims claims = Jwts.parser()
                 .setSigningKey(SECRET_KEY)
-                .parseClaimsJwt(token)
+                .parseClaimsJws(token)
                 .getBody();
         
         return claims;
