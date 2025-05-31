@@ -1,5 +1,6 @@
-package com.zhou.common;
+package com.zhou.common.exception;
 
+import com.zhou.common.entity.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;

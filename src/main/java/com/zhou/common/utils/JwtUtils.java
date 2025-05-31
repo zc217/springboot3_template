@@ -1,15 +1,15 @@
 package com.zhou.common.utils;
 
+import com.zhou.common.exception.BusinessException;
 import com.zhou.sys.model.SysUser;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
+@Slf4j
 public class JwtUtils {
     private static final String SECRET_KEY = "zhou";
     
@@ -32,11 +32,18 @@ public class JwtUtils {
     }
     
     public static Claims parse (String token){
-        Claims claims = Jwts.parser()
-                .setSigningKey(SECRET_KEY)
-                .parseClaimsJws(token)
-                .getBody();
-        
+        Claims claims = null;
+        try {
+            claims = Jwts.parser()
+                    .setSigningKey(SECRET_KEY)
+                    .parseClaimsJws(token)
+                    .getBody();
+        } catch (ExpiredJwtException | UnsupportedJwtException | MalformedJwtException | SignatureException |
+                 IllegalArgumentException e) {
+            log.error("token非法",e);
+            throw new BusinessException(2000,"token非法");
+        }
+
         return claims;
     }
 }

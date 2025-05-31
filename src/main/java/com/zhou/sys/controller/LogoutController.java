@@ -1,6 +1,6 @@
 package com.zhou.sys.controller;
 
-import com.zhou.common.Result;
+import com.zhou.common.entity.Result;
 import com.zhou.sys.service.LogoutService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

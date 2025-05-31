@@ -1,4 +1,4 @@
-package com.zhou.common;
+package com.zhou.common.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,6 +1,6 @@
 package com.zhou.sys.controller;
 
-import com.zhou.common.Result;
+import com.zhou.common.entity.Result;
 import com.zhou.sys.request.LoginRequest;
 import com.zhou.sys.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
